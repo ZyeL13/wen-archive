@@ -64,3 +64,6 @@ from constrained environments (mobile / low-resource).
 - Contract deployed
 - Source published
 - Actively used as onchain archive layer
+
+Verified contract (Base Sepolia):
+https://sepolia.basescan.org/address/0x33D2b6Fa6Fb68621Cadc524f6068293B32AB9752
