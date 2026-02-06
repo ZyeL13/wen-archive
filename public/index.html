@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEN</title>
+    <style>
+        /* Windows XP Terminal Theme */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(40, 120, 40, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 85% 85%, rgba(40, 120, 40, 0.03) 0%, transparent 20%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Lucida Console", "Courier New", monospace;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* CRT screen effect */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+            z-index: 2;
+            animation: scanlines 10s linear infinite;
+        }
+        
+        /* Subtle static/flicker effect */
+        body::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            opacity: 0;
+            z-index: 1;
+            animation: flicker 15s infinite;
+        }
+        
+        /* Main WEN text */
+        .wen-text {
+            font-size: 18vw;
+            color: #00FF41;
+            text-shadow: 
+                0 0 5px #00FF41,
+                0 0 10px #00FF41,
+                0 0 20px #00FF41,
+                0 0 40px #00FF41,
+                0 0 80px #00FF41;
+            letter-spacing: 0.1em;
+            position: relative;
+            z-index: 3;
+            font-weight: 700;
+            animation: pulse 4s ease-in-out infinite, float 6s ease-in-out infinite;
+            filter: contrast(1.2);
+        }
+        
+        /* Subtle glow behind text */
+        .wen-text::before {
+            content: "WEN";
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #003B00;
+            z-index: -1;
+            filter: blur(20px);
+            opacity: 0.5;
+        }
+        
+        /* Blinking cursor effect */
+        .cursor {
+            display: inline-block;
+            width: 0.15em;
+            height: 1.2em;
+            background-color: #00FF41;
+            margin-left: 0.1em;
+            animation: blink 1.5s step-end infinite;
+            vertical-align: text-bottom;
+            box-shadow: 0 0 10px #00FF41;
+        }
+        
+        /* Terminal-style border */
+        .terminal-border {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .terminal-border::before, .terminal-border::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 1px solid rgba(0, 255, 65, 0.5);
+        }
+        
+        .terminal-border::before {
+            top: -5px;
+            left: -5px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .terminal-border::after {
+            bottom: -5px;
+            right: -5px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        /* Subtle particles/glitches in background */
+        .glitch {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #00FF41;
+            opacity: 0;
+            z-index: 1;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% {
+                text-shadow: 
+                    0 0 5px #00FF41,
+                    0 0 10px #00FF41,
+                    0 0 20px #00FF41,
+                    0 0 40px #00FF41,
+                    0 0 80px #00FF41;
+                opacity: 1;
+            }
+            50% {
+                text-shadow: 
+                    0 0 2px #00FF41,
+                    0 0 5px #00FF41,
+                    0 0 10px #00FF41,
+                    0 0 20px #00FF41,
+                    0 0 40px #00FF41;
+                opacity: 0.9;
+            }
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        @keyframes scanlines {
+            0% { background-position: 0 0, 0 0; }
+            100% { background-position: 0 100%, 0 100%; }
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 0.01; }
+            5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% { opacity: 0.1; }
+            10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% { opacity: 0.02; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-10px) rotateX(2deg); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .wen-text {
+                font-size: 24vw;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .wen-text {
+                font-size: 28vw;
+            }
+            
+            .terminal-border {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main WEN text with blinking cursor -->
+    <div class="wen-text">WEN<span class="cursor"></span></div>
+    
+    <!-- Terminal border -->
+    <div class="terminal-border"></div>
+    
+    <!-- Background glitches -->
+    <div id="glitches"></div>
+
+    <script>
+        // Create random glitch effects in the background
+        document.addEventListener('DOMContentLoaded', function() {
+            const glitchContainer = document.getElementById('glitches');
+            const numGlitches = 30;
+            
+            for (let i = 0; i < numGlitches; i++) {
+                const glitch = document.createElement('div');
+                glitch.classList.add('glitch');
+                
+                // Random position
+                glitch.style.left = Math.random() * 100 + 'vw';
+                glitch.style.top = Math.random() * 100 + 'vh';
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                glitch.style.width = size + 'px';
+                glitch.style.height = size + 'px';
+                
+                // Random animation
+                const delay = Math.random() * 10;
+                const duration = Math.random() * 2 + 0.5;
+                glitch.style.animation = `glitchAppear ${duration}s ${delay}s infinite`;
+                
+                // Add custom animation for this glitch
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes glitchAppear {
+                        0%, 100% { opacity: 0; transform: translate(0, 0); }
+                        10%, 30%, 50%, 70%, 90% { opacity: ${Math.random() * 0.5 + 0.1}; }
+                        20% { transform: translate(${Math.random() * 5 - 2.5}px, ${Math.random() * 5 - 2.5}px); }
+                        40% { transform: translate(${Math.random() * 5 - 2.5}px, ${Math.random() * 5 - 2.5}px); }
+                        60% { transform: translate(${Math.random() * 5 - 2.5}px, ${Math.random() * 5 - 2.5}px); }
+                        80% { transform: translate(${Math.random() * 5 - 2.5}px, ${Math.random() * 5 - 2.5}px); }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                glitchContainer.appendChild(glitch);
+            }
+            
+            // Add subtle sound effect on click (simulated with visual feedback)
+            document.body.addEventListener('click', function() {
+                const wenText = document.querySelector('.wen-text');
+                wenText.style.transform = 'scale(1.05)';
+                wenText.style.filter = 'brightness(1.5) contrast(1.5)';
+                
+                setTimeout(() => {
+                    wenText.style.transform = '';
+                    wenText.style.filter = '';
+                }, 200);
+                
+                // Create a temporary flash effect
+                const flash = document.createElement('div');
+                flash.style.position = 'fixed';
+                flash.style.top = '0';
+                flash.style.left = '0';
+                flash.style.width = '100%';
+                flash.style.height = '100%';
+                flash.style.backgroundColor = 'rgba(0, 255, 65, 0.1)';
+                flash.style.zIndex = '4';
+                flash.style.pointerEvents = 'none';
+                document.body.appendChild(flash);
+                
+                setTimeout(() => {
+                    flash.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.removeChild(flash);
+                    }, 500);
+                }, 100);
+            });
+            
+            // Add keyboard interaction
+            document.addEventListener('keydown', function(e) {
+                if (e.key === ' ') {
+                    document.body.click();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

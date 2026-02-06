@@ -1,0 +1,18 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjQ2MzkzOSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDQ4MUEyQ0FGRTdlMGY2ODViNDJDRmM5YjU1N0IyOGFDODlFNTQ0NDUifQ",
+    "payload": "eyJkb21haW4iOiJ3ZW4tYWdlbnQudmVyY2VsLmFwcCJ9",
+    "signature": "WnNBgnnKJJJ+Ajp8hN0epz9M2y2yJd79mV3Ky80AAuV5sYbQjj2mHEGVg2/LmAKuI1dRwRiTojvstDMhqyJUqxw="
+  },
+  "frame": {
+    "version": "1",
+    "name": "文 Archive",
+    "iconUrl": "https://wen-agent.vercel.app/icon.png",
+    "homeUrl": "https://wen-agent.vercel.app",
+    "imageUrl": "https://wen-agent.vercel.app/og-image.png",
+    "buttonTitle": "View Archive",
+    "splashImageUrl": "https://wen-agent.vercel.app/splash.png",
+    "splashBackgroundColor": "#0a0a0a",
+    "webhookUrl": "https://wen-agent.vercel.app/api/webhook"
+  }
+}

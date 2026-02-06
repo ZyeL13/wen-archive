@@ -1,69 +1,208 @@
-# 文 / Wen Archive
+文 (wen) — Passive Farcaster Archive Agent
 
-Minimal onchain archive contract for recording symbolic actions.
+文 is a silent archival agent. It observes Farcaster, extracts patterns, and stores them without interpretation.
 
-This repository contains the core smart contract used by **文 (Wen)** —  
-an experimental agent that treats onchain events as *archives*, not signals.
+No commentary. No persuasion. No prediction. Only records.
 
-The contract does not interpret meaning.
-It only records the occurrence.
-
-Meaning is derived offchain by agents, rituals, or observers.
 
 ---
 
-## Concept
+Philosophy
 
-- 文 (Wen) means *writing / archive*
-- Actions are recorded as events
-- No gamification logic onchain
-- No user-facing explanation enforced
+passive by design
 
-Onchain remains silent.  
-Interpretation happens elsewhere.
+read-only behavior
 
----
+no forcing data
 
-## Contract
+absence is valid signal
 
-`WenArchive.sol` exposes a single action:
 
-- `tear(value, anomaly)`
-  - emits a `Tear` event
-  - records the caller, value, and anomaly state
+If data is unreachable, 文 waits.
 
-The contract intentionally avoids:
-- storage-heavy state
-- opinionated scoring logic
-- user-facing explanations
 
 ---
 
-## Tooling
+What 文 Does
 
-Built using a minimal, portable toolchain:
+reads public Farcaster casts
 
-- `solc-js` for compilation
-- `ethers.js` for deployment
-- no Hardhat / no native binaries
+processes them into abstract patterns
 
-This allows the project to be built and deployed
-from constrained environments (mobile / low-resource).
+stores patterns locally
 
----
+posts a minimal archive notice every 500 entries
 
-## Network
 
-- Deployed on **Base Sepolia**
-- Source verified onchain
+All output is observational.
+
 
 ---
 
-## Status
+Architecture Overview
 
+Farcaster (public data)
+        ↓
+     Scraper
+        ↓
+     Extractor
+        ↓
+     Local DB
+        ↓ (every 500)
+ Archive Notice → Farcaster
+
+文 does not chase data. If a source is unavailable, the cycle completes silently.
+
+
+---
+
+Data Source Choice
+
+Primary: Neynar API
+
+HTTPS (port 443)
+
+stable indexing layer
+
+suitable for read-only agents
+
+works reliably on mobile / Termux environments
+
+
+This is a pragmatic infra choice, not a protocol stance.
+
+Optional (Future)
+
+self-hosted Hubble
+
+alternative indexers
+
+
+These are intentionally not required.
+
+
+---
+
+Project Structure
+
+<<<<<<< HEAD
 - Contract deployed
 - Source published
 - Actively used as onchain archive layer
 
 Verified contract (Base Sepolia):
 https://sepolia.basescan.org/address/0x33D2b6Fa6Fb68621Cadc524f6068293B32AB9752
+=======
+archiver/
+ ├─ scheduler.py   # 12h loop controller
+ ├─ scraper.py     # data source access
+ ├─ extractor.py   # pattern abstraction
+ ├─ db.py          # local persistence
+ └─ poster.py      # archive notice sender
+
+
+---
+
+Scheduler Behavior
+
+runs immediately on start
+
+repeats every 12 hours
+
+if no casts are found: exits quietly
+
+if archived patterns ≥ 500:
+
+creates a batch
+
+posts a single archive notice
+
+
+
+No retries. No alerts.
+
+
+---
+
+Environment
+
+Python 3.10+
+
+designed to run on:
+
+Termux
+
+small VPS
+
+personal machines
+
+
+
+No enterprise assumptions.
+
+
+---
+
+Configuration
+
+Required:
+
+NEYNAR_API_KEY
+
+
+The agent will not start scraping without it.
+
+
+---
+
+Output Style
+
+Archive notices are minimal.
+
+Example:
+
+文
+archive 1200–1700
+numbers refreshed
+
+No explanation is provided.
+
+
+---
+
+Non-Goals
+
+文 explicitly does not:
+
+summarize narratives
+
+rank opinions
+
+predict outcomes
+
+optimize engagement
+
+act as an analyst
+
+
+
+---
+
+Status
+
+Active. Observing.
+
+
+---
+
+License
+
+MIT.
+
+Use freely. Modify quietly.
+
+
+---
+
+文 passive archive farcaster /base
+>>>>>>> 99cac56 (introduce 文 as passive archive agent)

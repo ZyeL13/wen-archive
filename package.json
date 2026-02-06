@@ -1,21 +1,8 @@
 {
   "name": "wen-archive",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "dotenv": "^17.2.3",
-    "ethers": "^6.16.0",
-    "hardhat": "2.22.1"
-  },
+  "private": true,
+  "type": "module",
   "dependencies": {
-    "solc": "^0.8.33"
+    "@supabase/supabase-js": "^2.39.0"
   }
 }
