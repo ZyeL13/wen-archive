@@ -1,15 +1,19 @@
-node_modules
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs
+*.log
+error.log
+
+# Node modules (kalau ada)
+node_modules/
+
+# Environment
 .env
+*.env
 
-# Hardhat files
-/cache
-/artifacts
-
-# TypeChain files
-/typechain
-/typechain-types
-
-# solidity-coverage files
-/coverage
-/coverage.json
-.vercel
+# Backup folders
+*-backup/
